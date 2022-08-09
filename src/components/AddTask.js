@@ -1,8 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
  
-const API_URL = "http://localhost:5005";
- 
  
 function AddTask(props) {
   const [title, setTitle] = useState("");
@@ -22,7 +20,7 @@ function AddTask(props) {
  
     axios
       .post(
-        `${API_URL}/api/tasks`, 
+        `${process.env.REACT_APP_API_URL}/api/tasks`, 
         requestBody,
         { headers: { Authorization: `Bearer ${storedToken}` } }
         )

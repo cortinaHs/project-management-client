@@ -2,10 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import AddProject from "../components/AddProject";
 import ProjectCard from "../components/ProjectCard";
- 
-const API_URL = "http://localhost:5005";
- 
- 
+
 function ProjectListPage() {
   const [projects, setProjects] = useState([]);
   const [ errorMessage, setErrorMessage ] = useState(null)
@@ -15,7 +12,7 @@ function ProjectListPage() {
     const storedToken = localStorage.getItem("authToken");
 
     axios
-      .get(`${API_URL}/api/projects`, { headers: { Authorization: `Bearer ${storedToken}` } })
+      .get(`${process.env.REACT_APP_API_URL}/api/projects`, { headers: { Authorization: `Bearer ${storedToken}` } })
       .then((response) => setProjects(response.data))
       .catch((error) => {
         console.log(error);

@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
  
-const API_URL = "http://localhost:5005";
- 
 function EditTaskPage(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -16,7 +14,7 @@ function EditTaskPage(props) {
 
   useEffect(() => {                                 
     axios
-      .get(`${API_URL}/api/tasks/${taskId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
+      .get(`${process.env.REACT_APP_API_URL}/api/tasks/${taskId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
       .then((response) => {
         /* 
           We update the state with the project data coming from the response.
@@ -43,7 +41,7 @@ function EditTaskPage(props) {
     // Make a PUT request to update the project
     axios
       .put(
-        `${API_URL}/api/tasks/${taskId}`, 
+        `${process.env.REACT_APP_API_URL}/api/tasks/${taskId}`, 
         requestBody,
         { headers: { Authorization: `Bearer ${storedToken}` } }
         )
@@ -61,7 +59,7 @@ function EditTaskPage(props) {
   const deleteTask = () => {    
     // Make a DELETE request to delete the project
     axios
-      .delete(`${API_URL}/api/tasks/${taskId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
+      .delete(`${process.env.REACT_APP_API_URL}/api/tasks/${taskId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
       .then(() => {
         // Once the delete request is resolved successfully
         // navigate back to the list of projects.

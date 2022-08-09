@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import axios from "axios";
 
-const API_URL = "http://localhost:5005";
-
 // We are deconstructing the props object directly in the parentheses of the function
 function TaskCard({ _id, title, description, done }) {
 
@@ -24,7 +22,7 @@ function TaskCard({ _id, title, description, done }) {
         // Make a PUT request to update the project
         axios
           .put(
-            `${API_URL}/api/tasks/${_id}`, 
+            `${process.env.REACT_APP_API_URL}/api/tasks/${_id}`, 
             requestBody,
             { headers: { Authorization: `Bearer ${storedToken}` } }
             )
